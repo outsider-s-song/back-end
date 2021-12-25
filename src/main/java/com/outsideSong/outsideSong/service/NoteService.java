@@ -12,6 +12,7 @@ import com.outsideSong.outsideSong.domain.Score;
 import com.outsideSong.outsideSong.repository.ScoreRepository;
 
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -40,4 +41,8 @@ public class NoteService {
         noteRepository.save(note);
     }
 
+    @Transactional
+    public void deleteNote(Long noteId) {
+        noteRepository.deleteById(noteId);
+    }
 }

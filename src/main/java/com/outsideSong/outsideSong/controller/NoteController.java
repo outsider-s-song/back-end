@@ -8,9 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -26,4 +24,12 @@ public class NoteController {
 
         return new ResponseEntity<>(requestDto.getIndex(), HttpStatus.OK);
     }
+
+
+    @DeleteMapping("/notes")
+    public ResponseEntity<?> deleteNote(@RequestParam Long noteId, ){
+        noteService.deleteNote(noteId);
+        return new ResponseEntity<>("delete note complete", HttpStatus.OK);
+    }
+
 }

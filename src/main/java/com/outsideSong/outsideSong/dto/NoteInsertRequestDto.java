@@ -4,7 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class NoteInsertRequestDto {
-
     private String userNick;
     private String userPw;
     private String contents;
