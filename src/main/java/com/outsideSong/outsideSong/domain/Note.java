@@ -2,11 +2,14 @@ package com.outsideSong.outsideSong.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.outsideSong.outsideSong.dto.NoteUpdateRequestDto;
+import com.outsideSong.outsideSong.validator.NoteValidator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import static com.outsideSong.outsideSong.validator.NoteValidator.*;
 
 @NoArgsConstructor
 @Getter
@@ -30,6 +33,9 @@ public class Note {
     private Score score;
 
     public Note(String userNick, String userPw, String content, int index, Score score) {
+        validateNickname(userNick);
+        validatePassword(userPw);
+        validateContent(content);
         this.userNick = userNick;
         this.userPw = userPw;
         this.content = content;
