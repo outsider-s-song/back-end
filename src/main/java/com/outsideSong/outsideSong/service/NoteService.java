@@ -65,7 +65,13 @@ public class NoteService {
             }
 
             if (dto != null) responseDto.add(dto);
-            else responseDto.add(new NoteListResponseDto(scoreId, 0L, null, null, new String[]{}, i, null, false));
+            else {
+                FixNote foundNote = FixNote.getNote(i);
+                String pitch = foundNote.getPitch();
+                String beat = foundNote.getBeat();
+                String color = foundNote.getColor();
+                responseDto.add(new NoteListResponseDto(scoreId, 0L, null, null, new String[]{pitch, beat}, i, color, false));
+            }
         }
 
         return responseDto;
