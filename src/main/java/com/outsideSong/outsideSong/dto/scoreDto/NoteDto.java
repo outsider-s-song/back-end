@@ -1,4 +1,4 @@
-package com.outsideSong.outsideSong.dto;
+package com.outsideSong.outsideSong.dto.scoreDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +10,5 @@ import lombok.Setter;
 public class NoteDto {
     private String[] note;
     private Long index;
-    private String collar;
-
+    private String color;
 }

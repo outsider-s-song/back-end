@@ -1,6 +1,6 @@
 package com.outsideSong.outsideSong.controller;
 
-import com.outsideSong.outsideSong.dto.ScoreDto;
+import com.outsideSong.outsideSong.dto.scoreDto.ScoreListDto;
 import com.outsideSong.outsideSong.service.ScoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,10 +15,9 @@ public class ScoreController {
 
     @GetMapping("/scores")
     public ResponseEntity<?> getScoreList(){
-        ScoreDto scoreDto = scoreService.getScoreList();
+        ScoreListDto scoreList = scoreService.getScoreList();
 
-
-        return new ResponseEntity<>( HttpStatus.OK);
+        return new ResponseEntity<>( scoreList.getScoreList(), HttpStatus.OK);
     }
 
 }

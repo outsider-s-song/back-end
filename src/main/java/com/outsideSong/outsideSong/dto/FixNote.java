@@ -21,21 +21,21 @@ public enum FixNote {
     private String color;
 
     public static FixNote getNote(int index){
-        if(index >= 0 || index < 8)
+        if(index >= 0 && index < 8)
             return note1;
-        else if(index >= 8 || index < 16)
+        else if(index >= 8 && index < 16)
             return note2;
-        else if(index >= 16 || index < 24)
+        else if(index >= 16 && index < 24)
             return note3;
-        else if(index >= 24 || index < 32)
+        else if(index >= 24 && index < 32)
             return note4;
-        else if(index >= 32 || index < 40)
+        else if(index >= 32 && index < 40)
             return note5;
-        else if(index >= 40 || index < 48)
+        else if(index >= 40 && index < 48)
             return note6;
-        else if(index >= 48 || index < 56)
+        else if(index >= 48 && index < 56)
             return note7;
-        else if(index >= 56 || index < 64)
+        else if(index >= 56 && index < 64)
             return note8;
         else
             return null;
