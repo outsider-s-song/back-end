@@ -1,8 +1,8 @@
 package com.outsideSong.outsideSong.service;
-import com.outsideSong.outsideSong.dto.NoteInsertRequestDto;
-import com.outsideSong.outsideSong.dto.ScoreDto;
+import com.outsideSong.outsideSong.dto.*;
 import com.outsideSong.outsideSong.repository.NoteRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import com.outsideSong.outsideSong.domain.Note;
 import com.outsideSong.outsideSong.domain.Score;
@@ -12,8 +12,11 @@ import com.outsideSong.outsideSong.repository.ScoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class NoteService {
@@ -38,5 +41,38 @@ public class NoteService {
 
         Note note = new Note(userNick, userPw, content, index, score);
         noteRepository.save(note);
+    }
+
+    // 노트 리스트 조회
+    public List<NoteListResponseDto> getNoteList(Long scoreId) {
+
+        Optional<Score> foundScore = scoreRepository.findById(scoreId);
+        if (!foundScore.isPresent()) throw new NullPointerException("존재하지 않는 악보입니다");
+
+        List<NoteListResponseDto> responseDto = new ArrayList<>();
+        List<Note> noteList = noteRepository.findAllByScoreId(scoreId);
+
+        for (int i=0; i<=63; i++) {
+            NoteListResponseDto dto = null;
+            for (Note note : noteList) {
+                if (i == note.getIndex()) {
+                    Long noteId = note.getId();
+                    String userNick = note.getUserNick();
+                    String content = note.getContent();
+                    FixNote foundNote = FixNote.getNote(i);
+                    String pitch = foundNote.getPitch();
+                    String beat = foundNote.getBeat();
+                    String color = foundNote.getColor();
+
+                    dto = new NoteListResponseDto(scoreId, noteId, userNick, content, new String[]{pitch, beat}, i, color, true);
+                    break;
+                }
+            }
+
+            if (dto != null) responseDto.add(dto);
+            else responseDto.add(new NoteListResponseDto(scoreId, 0L, null, null, new String[]{}, i, null, false));
+        }
+
+        return responseDto;
     }
 }
