@@ -27,4 +27,12 @@ public class Note {
     @JsonManagedReference
     @JoinColumn(name = "score_id")
     private Score score;
+
+    public Note(String userNick, String userPw, String content, int index, Score score) {
+        this.userNick = userNick;
+        this.userPw = userPw;
+        this.content = content;
+        this.index = index;
+        this.score = score;
+    }
 }
