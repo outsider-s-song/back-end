@@ -11,9 +11,9 @@ public enum FixNote {
     note3("E5", "16n", "#85A638"),
     note4("D5", "16n", "#468263"),
     note5("C5", "16n", "#5B89A6"),
-    note6("B4", "16n", "#A68160"),
-    note7("A4", "16n", "#C0C0B0"),
-    note8("G4", "16n", "#F2E2CE");
+    note6("B4", "16n", "#401A12"),
+    note7("A4", "16n", "#8F1C14"),
+    note8("G4", "16n", "#9F4BF2");
 
 
     private String pitch;
