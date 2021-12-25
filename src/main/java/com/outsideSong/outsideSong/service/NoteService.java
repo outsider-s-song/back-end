@@ -1,7 +1,9 @@
 package com.outsideSong.outsideSong.service;
 
+import com.outsideSong.outsideSong.dto.NoteDeleteRequestDto;
 import com.outsideSong.outsideSong.dto.NoteInsertRequestDto;
 
+import com.outsideSong.outsideSong.dto.NoteUpdateRequestDto;
 import com.outsideSong.outsideSong.repository.NoteRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -42,7 +44,26 @@ public class NoteService {
     }
 
     @Transactional
-    public void deleteNote(Long noteId) {
+    public void deleteNote(Long noteId, NoteDeleteRequestDto requestDto) {
+        Note findNote = noteRepository.findById(noteId).orElseThrow(
+                () -> new NullPointerException("not found board")
+        );
+
+        if(!findNote.getUserPw().equals(requestDto.getUserPw()))
+            throw new IllegalStateException( "user password not correct");
+
         noteRepository.deleteById(noteId);
+    }
+
+    @Transactional
+    public void updateNote(Long noteId, NoteUpdateRequestDto requestDto) {
+        Note findNote = noteRepository.findById(noteId).orElseThrow(
+                () -> new NullPointerException("not found board")
+        );
+
+        if(!findNote.getUserPw().equals(requestDto.getUserPw()))
+            throw new IllegalStateException( "user password not correct");
+
+        findNote.updateNote(requestDto);
     }
 }

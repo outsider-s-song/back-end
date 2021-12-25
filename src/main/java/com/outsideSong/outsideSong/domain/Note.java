@@ -1,8 +1,10 @@
 package com.outsideSong.outsideSong.domain;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.outsideSong.outsideSong.dto.NoteUpdateRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -33,5 +35,10 @@ public class Note {
         this.content = content;
         this.index = index;
         this.score = score;
+    }
+
+    public void updateNote(NoteUpdateRequestDto requestDto){
+        userNick = requestDto.getUserNick();
+        content = requestDto.getContents();
     }
 }

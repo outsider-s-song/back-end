@@ -1,10 +1,10 @@
 package com.outsideSong.outsideSong.controller;
 
+import com.outsideSong.outsideSong.dto.NoteDeleteRequestDto;
+import com.outsideSong.outsideSong.dto.NoteUpdateRequestDto;
 import com.outsideSong.outsideSong.service.NoteService;
 import lombok.RequiredArgsConstructor;
 import com.outsideSong.outsideSong.dto.NoteInsertRequestDto;
-import com.outsideSong.outsideSong.service.NoteService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -26,10 +26,16 @@ public class NoteController {
     }
 
 
-    @DeleteMapping("/notes")
-    public ResponseEntity<?> deleteNote(@RequestParam Long noteId, ){
-        noteService.deleteNote(noteId);
+    @PostMapping("/notes/delete")
+    public ResponseEntity<?> deleteNote(@RequestParam Long noteId, @RequestBody NoteDeleteRequestDto requestDto){
+        noteService.deleteNote(noteId, requestDto);
         return new ResponseEntity<>("delete note complete", HttpStatus.OK);
+    }
+
+    @PutMapping("/notes")
+    public ResponseEntity<?> updateNote(@RequestBody NoteUpdateRequestDto requestDto, @RequestParam Long noteId){
+        noteService.updateNote(noteId, requestDto);
+        return new ResponseEntity<>("note update complete", HttpStatus.OK);
     }
 
 }
